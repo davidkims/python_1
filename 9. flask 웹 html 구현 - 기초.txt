@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Homepage</title>
+</head>
+<body>
+    <h1>Welcome to My Homepage</h1>
+    <p>This is a simple homepage created using Flask.</p>
+</body>
+</html>
