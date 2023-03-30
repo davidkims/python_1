@@ -1,0 +1,32 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    # PR events for all non-fork repositories
+    branches: [main, master]
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        # We must fetch at least the immediate parents so that if this commit was
+        # created from a pull request with history-analysis enabled, we can trace
+        # back to the merge commit.
+        fetch-depth: 2
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: "cpp, csharp, go, java, javascript, python"
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
