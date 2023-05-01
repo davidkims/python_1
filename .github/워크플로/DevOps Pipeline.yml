@@ -1,0 +1,36 @@
+DevOps Pipeline.yml
+name: DevOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          source .venv/bin/activate
+          pytest
+
+      - name: Deploy to production
+        run: |
+          source .venv/bin/activate
+          deploy-to-production.sh
+        env:
+          PRODUCTION_SERVER: $
+          PRODUCTION_USERNAME: $
+          PRODUCTION_P***WORD: $
+```
